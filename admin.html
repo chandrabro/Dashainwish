@@ -66,6 +66,9 @@
         <label style="display:flex;gap:8px;align-items:center">
           <input type="checkbox" data-k="photo_enabled"> Let users add their photo
         </label>
+        <label style="display:flex;gap:8px;align-items:center">
+          <input type="checkbox" data-k="post_enabled"> Let users write a message
+        </label>
 
         <div class="row" style="margin-top:18px">
           <button id="saveBtn">Save to list</button>
@@ -86,7 +89,8 @@
     var DEFAULTS = {
       name_x: 0.5, name_y: 0.7, name_size: 0.06, name_color: "#ffffff",
       post_x: 0.5, post_y: 0.78, post_size: 0.035, post_color: "#ffd700",
-      photo_enabled: false, photo_x: 0.5, photo_y: 0.4, photo_size: 0.3,
+      photo_enabled: true, photo_x: 0.5, photo_y: 0.4, photo_size: 0.3,
+      post_enabled: false,
       max_width: 0.8
     };
     var list = [];          // templates (same shape as templates.json)
@@ -182,6 +186,7 @@
 
     function startEdit(t, newOne) {
       cur = Object.assign({}, t);
+      if (cur.post_enabled === undefined) cur.post_enabled = true;
       if (!newOne) cur.src = t.image;
       isNew = newOne;
       active = "name";
@@ -200,6 +205,7 @@
         if (el.type === "checkbox") el.checked = !!v; else el.value = v;
       });
       document.querySelector('[data-tab="photo"]').hidden = !cur.photo_enabled;
+      document.querySelector('[data-tab="post"]').hidden = !cur.post_enabled;
     }
 
     document.querySelectorAll("[data-k]").forEach(function (el) {
@@ -209,6 +215,11 @@
         if (k === "photo_enabled") {
           document.querySelector('[data-tab="photo"]').hidden = !el.checked;
           if (!el.checked && active === "photo") active = "name";
+          showTab();
+        }
+        if (k === "post_enabled") {
+          document.querySelector('[data-tab="post"]').hidden = !el.checked;
+          if (!el.checked && active === "post") active = "name";
           showTab();
         }
         redraw();
