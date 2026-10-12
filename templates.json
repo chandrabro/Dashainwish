@@ -47,7 +47,7 @@
     "post_y": 0.82,
     "post_size": 0.035,
     "post_color": "#ffd700",
-    "photo_enabled": false,
+    "photo_enabled": true,
     "photo_x": 0.5,
     "photo_y": 0.4,
     "photo_size": 0.3,
