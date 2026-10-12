@@ -129,5 +129,7 @@ async function drawWish(canvas, t, opts) {
   }
 
   drawText(ctx, name, t.name_x * W, t.name_y * H, t.name_size * W, t.name_color, maxW, false);
-  drawText(ctx, post, t.post_x * W, t.post_y * H, t.post_size * W, t.post_color, maxW, true);
+  if (t.post_enabled !== false) {
+    drawText(ctx, post, t.post_x * W, t.post_y * H, t.post_size * W, t.post_color, maxW, true);
+  }
 }
