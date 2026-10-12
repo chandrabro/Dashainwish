@@ -24,8 +24,10 @@
         <h2 style="margin-top:18px">2. Your details</h2>
         <label for="name">Your name</label>
         <input type="text" id="name" maxlength="40" placeholder="e.g. Ram Bahadur / राम बहादुर">
-        <label for="post">Your wish / post</label>
-        <textarea id="post" maxlength="200" placeholder="e.g. Wishing you happiness and prosperity this Dashain"></textarea>
+        <div id="postBox">
+          <label for="post">Your wish / post</label>
+          <textarea id="post" maxlength="200" placeholder="e.g. Wishing you happiness and prosperity this Dashain"></textarea>
+        </div>
 
         <div id="photoBox" hidden>
           <label for="photo">Your photo (optional)</label>
@@ -77,6 +79,7 @@
       sel = t;
       templates.forEach(function (x) { x._el.className = x === t ? "active" : ""; });
       $("photoBox").hidden = !t.photo_enabled;
+      $("postBox").hidden = t.post_enabled === false;
       redraw();
     }
 
